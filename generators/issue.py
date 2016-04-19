@@ -5,7 +5,7 @@ import random
 class IssueGenerator(Generator):
   def __init__(self, name):
     self.name = name
-    self.mod = 1 + random.randrange(2)
+    self.mod = random.randrange(2)
     nRegions = int(random.triangular(2, 10, 5))
     
     self.divides = []
@@ -18,6 +18,6 @@ class IssueGenerator(Generator):
   def generate(self, id):
     iRegion = 0
     for d in self.divides:
-      if id > d: break
+      if id < d: break
       iRegion += 1
-    return bool(iRegion % self.mod)
+    return bool((iRegion % 2) ^ self.mod) #use the mod to ensure it does not always start pro

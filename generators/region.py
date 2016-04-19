@@ -35,7 +35,7 @@ class RegionGenerator(Generator):
   def generate(self, id):
     iRegion = 0
     for d in self.divides:
-      if (id > d): break
+      if (id < d): break
       iRegion += 1
     return self.regions[iRegion]
     
