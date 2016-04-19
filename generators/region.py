@@ -15,12 +15,7 @@ class Region:
 
     
 class RegionGenerator(Generator):
-  def __init__(self, filename):
-    names = []
-    with open(filename) as file:
-      for line in file:
-        if line.startswith('#') or line == '\n' or line == '': continue
-        names.append(line[:-1])
+  def __init__(self, names):
     nRegions = int(random.triangular(2,10,5))
     self.regions = []
     for i in range(nRegions):
@@ -52,4 +47,5 @@ class RegionGenerator(Generator):
       if not first: s += ', '
       s += str(d)
       first = False
+    s += '\n'
     return s
