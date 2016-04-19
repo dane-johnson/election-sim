@@ -1,3 +1,5 @@
+from generators import Generator
+
 import random
 
 class Region:
@@ -8,6 +10,8 @@ class Region:
     self.residents.append(resident)
   def addResidents(self, residents):
     self.residents.extend(residents)
+  def __str__(self):
+    return self.name
 
     
 class RegionGenerator(Generator):
@@ -15,11 +19,12 @@ class RegionGenerator(Generator):
     names = []
     with open(filename) as file:
       for line in file:
-        names.append(line)
-    nRegions = random.triangular(1,10,5)
+        if line.startswith('#') or line == '\n' or line == '': continue
+        names.append(line[:-1])
+    nRegions = int(random.triangular(2,10,5))
     self.regions = []
     for i in range(nRegions):
-      iName = random.range(len(names))
+      iName = random.randrange(len(names))
       name = names[iName]
       names.remove(name)
       self.regions.append(Region(name))
@@ -27,9 +32,10 @@ class RegionGenerator(Generator):
       self.divides = []
       for i in range(nRegions - 1):
         divide = random.randrange(1, 100)
-        while self.divides.contains(divide):
+        while divide in self.divides:
           divide = random.randrange(1, 100)
-        divides.append(divide)
+        self.divides.append(divide)
+      self.divides.sort()
   
   def generate(self, id):
     iRegion = 0
@@ -37,3 +43,13 @@ class RegionGenerator(Generator):
       if (id > d): break
       iRegion += 1
     return self.regions[iRegion]
+    
+  def __str__(self):
+    s = ''
+    for r in self.regions: s += '%s\n' % r
+    first = True
+    for d in self.divides:
+      if not first: s += ', '
+      s += str(d)
+      first = False
+    return s
