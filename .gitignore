@@ -1,0 +1,4 @@
+#ignore Test.py
+Test.py
+#ignore generated .pyc files
+*.pyc
