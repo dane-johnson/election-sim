@@ -15,3 +15,6 @@ class Resident:
       s += '%s->%s\t' % (k, ('aye' if self.issues[k] else 'nay'))
     s += '\n'
     return s
+  def vote(self, candidates):
+    red, blue = candidates
+    return red

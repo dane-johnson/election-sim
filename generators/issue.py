@@ -2,6 +2,9 @@ from generators import Generator
 
 import random
 
+AYE = 1
+NAY = 0
+
 class IssueGenerator(Generator):
   def __init__(self, name):
     self.name = name
@@ -20,4 +23,4 @@ class IssueGenerator(Generator):
     for d in self.divides:
       if id < d: break
       iRegion += 1
-    return bool((iRegion % 2) ^ self.mod) #use the mod to ensure it does not always start pro
+    return (iRegion % 2) ^ self.mod #use the mod to ensure it does not always start nay

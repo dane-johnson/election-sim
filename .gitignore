@@ -4,3 +4,5 @@ Test.py
 *.pyc
 #ignore log files from testing
 *.log
+#ignore windows batch files
+*.bat

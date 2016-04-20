@@ -49,3 +49,5 @@ class RegionGenerator(Generator):
       first = False
     s += '\n'
     return s
+  def __iter__(self):
+    return iter(self.regions)
